@@ -1,5 +1,8 @@
 package com.StepDefinition;
 
+import java.util.List;
+import java.util.Map;
+
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -8,6 +11,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
+import io.cucumber.datatable.DataTable;
 
 public class AddCustomerSteps {
 	WebDriver driver;
@@ -37,6 +41,34 @@ public class AddCustomerSteps {
 
 		
 		}
+		
+		@When("the user started filling all the details")
+		public void the_user_started_filling_all_the_details(DataTable dataTable) {
+			List<String> CustomerDetailslist= dataTable.asList(String.class);
+		    System.out.println(CustomerDetailslist);
+		    driver.findElement(By.xpath("//label[@for='done']")).click();
+			driver.findElement(By.name("fname")).sendKeys(CustomerDetailslist.get(0));
+			driver.findElement(By.name("lname")).sendKeys(CustomerDetailslist.get(1));
+			driver.findElement(By.id("email")).sendKeys(CustomerDetailslist.get(2));
+			driver.findElement(By.name("addr")).sendKeys(CustomerDetailslist.get(3));
+			driver.findElement(By.name("telephoneno")).sendKeys(CustomerDetailslist.get(4));
+		}
+		
+		@When("the user has filling all the details")
+		public void the_user_has_filling_all_the_details(DataTable dataTable1) {
+			Map<String, String> CustomerDetailsMap = dataTable1.asMap(String.class,String.class);
+		    System.out.println(CustomerDetailsMap);
+		    driver.findElement(By.xpath("//label[@for='done']")).click();
+			driver.findElement(By.name("fname")).sendKeys(CustomerDetailsMap.get("Firstname"));
+			driver.findElement(By.name("lname")).sendKeys(CustomerDetailsMap.get("Lastname"));
+			driver.findElement(By.id("email")).sendKeys(CustomerDetailsMap.get("Email ID"));
+			driver.findElement(By.name("addr")).sendKeys(CustomerDetailsMap.get("Address"));
+			driver.findElement(By.name("telephoneno")).sendKeys(CustomerDetailsMap.get("Telephone No"));
+
+		    
+		}
+
+
 
 		@When("the user click on Submit button")
 		public void the_user_click_on_Submit_button() {

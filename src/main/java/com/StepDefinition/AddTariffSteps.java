@@ -35,6 +35,20 @@ public class AddTariffSteps {
 			driver.findElement(By.name("sms_charges")).sendKeys("1");
 
 		}
+		
+		@When("the user has filling all the tariff details{string},{string},{string},{string},{string},{string},{string}")
+		public void the_user_has_filling_all_the_tariff_details(String Monthrent, String Freeloc, String Freeint, String Freesms, String Localcharges, String Intercharges, String Smscharges) {
+			driver.findElement(By.name("rental")).sendKeys(Monthrent);
+			driver.findElement(By.name("local_minutes")).sendKeys(Freeloc);
+			driver.findElement(By.name("inter_minutes")).sendKeys(Freeint);
+			driver.findElement(By.name("sms_pack")).sendKeys(Freesms);
+			driver.findElement(By.name("minutes_charges")).sendKeys(Localcharges);
+			driver.findElement(By.name("inter_charges")).sendKeys(Intercharges);
+			driver.findElement(By.name("sms_charges")).sendKeys(Smscharges);
+
+		}
+
+
 
 		@When("the user click on done button")
 		public void the_user_click_on_done_button() {
